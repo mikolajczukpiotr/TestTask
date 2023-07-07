@@ -1,16 +1,16 @@
+
 import React, { useState } from "react";
 import useRestaurantData from "./useRestaurantData";
 import { Select, View, Text } from "native-base";
 
-const SelectRestaurant = () => {
+const SelectRestaurant = ({
+  setSelectedRestaurant,
+  selectedRestaurant,
+}: {
+  setSelectedRestaurant: (selectedRestaurantId: string) => void;
+  selectedRestaurant: string | undefined;
+}) => {
   const { restaurants, isLoading, error } = useRestaurantData();
-  const [selectedRestaurant, setSelectedRestaurant] = useState<
-    string | undefined
-  >(undefined);
-
-  const handleRestaurantChange = (value: string) => {
-    setSelectedRestaurant(value);
-  };
 
   if (isLoading) {
     return <Text>Loading...</Text>;
@@ -24,7 +24,7 @@ const SelectRestaurant = () => {
     <View my="2">
       <Select
         selectedValue={selectedRestaurant}
-        onValueChange={handleRestaurantChange}
+        onValueChange={setSelectedRestaurant}
         placeholder="Select restaurant"
       >
         {restaurants.map((restaurant) => (
