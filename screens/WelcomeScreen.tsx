@@ -1,8 +1,9 @@
 import React from "react";
-import { Text, View, Image, Flex } from "native-base";
+import { Text, Image, Flex, Button } from "native-base";
 import LoginForm from "../components/LoginForm";
+import { TouchableOpacity } from "react-native";
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }: { navigation: any }) => {
   return (
     <Flex flex={1} alignItems="center" justifyContent="center" mx="6">
       <Image
@@ -16,6 +17,12 @@ const WelcomeScreen = () => {
         <Text color="gray.500">Hi there! Nice to see you again.</Text>
       </Flex>
       <LoginForm />
+
+      <TouchableOpacity onPress={() => navigation.push("Terms")}>
+        <Text my="6" fontSize="xs" color="gray.500">
+          check terms
+        </Text>
+      </TouchableOpacity>
     </Flex>
   );
 };
