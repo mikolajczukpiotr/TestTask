@@ -9,10 +9,13 @@ import {
 import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { RootNavigationProp } from "../types/StackNavigator";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigation = useNavigation<RootNavigationProp>();
+  const [email, setEmail] = useState("example@gsdfgfsd.com");
+  const [password, setPassword] = useState("fsdafsdafasdfasdf");
   const [show, setShow] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -48,7 +51,7 @@ const LoginForm = () => {
     const isPasswordValid = validatePassword();
 
     if (isEmailValid && isPasswordValid) {
-      console.log(email, password);
+      navigation.push("Calculation");
     }
   };
   return (

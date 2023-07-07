@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider } from "native-base";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import TermsScreen from "./screens/TermsScreen";
+import CalculationScreen from "./screens/CalculationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,11 @@ export default function App() {
             <Stack.Screen
               name="Home"
               component={WelcomeScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Calculation"
+              component={CalculationScreen}
               options={{ headerShown: false }}
             />
             <Stack.Screen
