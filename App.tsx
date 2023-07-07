@@ -1,11 +1,7 @@
 import { Box, NativeBaseProvider } from "native-base";
-import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
-import WelcomeScreen from "./screens/WelcomeScreen";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import Navigator from "./routers/mainStack";
 
 export default function App() {
   return (
@@ -13,7 +9,7 @@ export default function App() {
       <NativeBaseProvider>
         <Box flex={1} bg="#fff">
           <StatusBar style="auto" />
-          <WelcomeScreen />
+          <Navigator />
         </Box>
       </NativeBaseProvider>
     </SafeAreaProvider>
