@@ -65,7 +65,9 @@ const LoginForm = () => {
         error={passwordError}
         secureTextEntry={true}
       />
-      <Button onPress={handleLogin}>Sign in</Button>
+      <Button size="lg" onPress={handleLogin}>
+        Sign in
+      </Button>
     </View>
   );
 };

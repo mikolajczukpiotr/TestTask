@@ -39,6 +39,7 @@ const Input = ({
         variant="underlined"
         type={showPassword ? "password" : "text"}
         w="100%"
+        size="lg"
         placeholder={placeholder}
         InputRightElement={
           secureTextEntry ? (

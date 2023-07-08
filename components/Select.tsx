@@ -23,6 +23,7 @@ const Select = ({
         onValueChange={setSelected}
         placeholder={`Select ${title}`}
         isDisabled={isDisabled}
+        fontSize={18}
       >
         {data.map((item, key) => (
           <NativeBaseSelect.Item
