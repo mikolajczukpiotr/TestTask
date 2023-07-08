@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Select, View, Text } from "native-base";
+import { Select as NativeBaseSelect, View, Text } from "native-base";
 import useRestaurantData from "../hooks/useRestaurantData";
 import { Restaurant, Menu } from "../types";
 
-const GenericSelect = ({
+const Select = ({
   data,
   setSelected,
   selected,
@@ -18,22 +18,22 @@ const GenericSelect = ({
 }) => {
   return (
     <View my="2">
-      <Select
+      <NativeBaseSelect
         selectedValue={selected}
         onValueChange={setSelected}
         placeholder={`Select ${title}`}
         isDisabled={isDisabled}
       >
         {data.map((item, key) => (
-          <Select.Item
+          <NativeBaseSelect.Item
             key={key}
             label={typeof item === "object" ? item.name : item}
             value={typeof item === "object" ? item.id.toString() : item}
           />
         ))}
-      </Select>
+      </NativeBaseSelect>
     </View>
   );
 };
 
-export default GenericSelect;
+export default Select;

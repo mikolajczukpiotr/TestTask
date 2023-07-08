@@ -15,3 +15,9 @@ export type Menu = {
   price: number;
   rank?: number;
 };
+
+export type Order = {
+  restaurant: string;
+  product: string;
+  price: number;
+};

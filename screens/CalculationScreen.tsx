@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Select } from "native-base";
+import { View, Text } from "native-base";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import GenericSelect from "../components/GenericSelect";
+import Select from "../components/Select";
 import useRestaurantData from "../hooks/useRestaurantData";
 import useMenuData from "../hooks/useMenuData";
+import OrderList from "../components/Orders/OrderList";
 
 const CalculationScreen = () => {
   const insets = useSafeAreaInsets();
@@ -56,25 +57,31 @@ const CalculationScreen = () => {
       px="4"
     >
       <Text>Create new entry</Text>
-      <GenericSelect
+      <Select
         setSelected={handleRestaurantChange}
         selected={selectedRestaurant}
         data={restaurants}
         title="restaurant"
       />
-      <GenericSelect
+      <Select
         setSelected={handleCategoryChange}
         selected={selectedCategory}
         data={categoryList}
         title="category"
-        isDisabled={!selectedRestaurant || restaurantLoading }
+        isDisabled={!selectedRestaurant || restaurantLoading}
       />
-      <GenericSelect
+      <Select
         setSelected={handleProductChange}
         selected={selectedProduct}
         data={menu}
         title="product"
-        isDisabled={!selectedCategory || menuLoading || menuError}
+        isDisabled={!selectedCategory || menuLoading}
+      />
+      <OrderList
+        selectedRestaurant={selectedRestaurant}
+        selectedProduct={selectedProduct}
+        restaurants={restaurants}
+        menu={menu}
       />
     </View>
   );
