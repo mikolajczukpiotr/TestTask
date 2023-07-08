@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, Image, Flex, Button } from "native-base";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/Login/LoginForm";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { RootNavigationProp } from "../types/StackNavigator";

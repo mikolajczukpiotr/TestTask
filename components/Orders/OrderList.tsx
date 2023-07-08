@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FlatList, Text, View, Input } from "native-base";
+import { Button, FlatList, Text, View } from "native-base";
 import { Restaurant, Menu, Order } from "../../types";
 import OrderItem from "./OrderItem";
 
@@ -15,7 +15,6 @@ const OrderList = ({
   selectedProduct: string | undefined;
 }) => {
   const [orderList, setOrderList] = useState<Order[]>([]);
-
   const handleCreateOrder = () => {
     if (selectedRestaurant && selectedProduct) {
       const selectedRestaurantName = restaurants.find(
@@ -28,13 +27,15 @@ const OrderList = ({
         (product) => product.id.toString() === selectedProduct
       )?.price;
 
-      const newOrder: Order = {
-        restaurant: selectedRestaurantName || "",
-        product: selectedProductName || "",
-        price: selectedProductPrice || 0,
-      };
+      if (selectedProductName && selectedRestaurantName) {
+        const newOrder: Order = {
+          restaurant: selectedRestaurantName || "",
+          product: selectedProductName || "",
+          price: selectedProductPrice || 0,
+        };
 
-      setOrderList((prevOrderList) => [...prevOrderList, newOrder]);
+        setOrderList((prevOrderList) => [...prevOrderList, newOrder]);
+      }
     }
   };
 
