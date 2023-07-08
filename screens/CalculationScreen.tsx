@@ -5,6 +5,7 @@ import Select from "../components/Select";
 import useRestaurantData from "../hooks/useRestaurantData";
 import useMenuData from "../hooks/useMenuData";
 import OrderList from "../components/Orders/OrderList";
+import { KeyboardAvoidingView, Platform } from "react-native";
 
 const CalculationScreen = () => {
   const insets = useSafeAreaInsets();
@@ -56,33 +57,38 @@ const CalculationScreen = () => {
       }}
       px="4"
     >
-      <Text>Create new entry</Text>
-      <Select
-        setSelected={handleRestaurantChange}
-        selected={selectedRestaurant}
-        data={restaurants}
-        title="restaurant"
-      />
-      <Select
-        setSelected={handleCategoryChange}
-        selected={selectedCategory}
-        data={categoryList}
-        title="category"
-        isDisabled={!selectedRestaurant || restaurantLoading}
-      />
-      <Select
-        setSelected={handleProductChange}
-        selected={selectedProduct}
-        data={menu}
-        title="product"
-        isDisabled={!selectedCategory || menuLoading}
-      />
-      <OrderList
-        selectedRestaurant={selectedRestaurant}
-        selectedProduct={selectedProduct}
-        restaurants={restaurants}
-        menu={menu}
-      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <Text fontSize="xl">Create new entry</Text>
+        <Select
+          setSelected={handleRestaurantChange}
+          selected={selectedRestaurant}
+          data={restaurants}
+          title="restaurant"
+        />
+        <Select
+          setSelected={handleCategoryChange}
+          selected={selectedCategory}
+          data={categoryList}
+          title="category"
+          isDisabled={!selectedRestaurant || restaurantLoading}
+        />
+        <Select
+          setSelected={handleProductChange}
+          selected={selectedProduct}
+          data={menu}
+          title="product"
+          isDisabled={!selectedCategory || menuLoading}
+        />
+        <OrderList
+          selectedRestaurant={selectedRestaurant}
+          selectedProduct={selectedProduct}
+          restaurants={restaurants}
+          menu={menu}
+        />
+      </KeyboardAvoidingView>
     </View>
   );
 };

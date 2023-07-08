@@ -73,7 +73,12 @@ const OrderList = ({
 
   return (
     <>
-      <Button my="2" onPress={handleCreateOrder} disabled={!selectedProduct}>
+      <Button
+        my="2"
+        size="lg"
+        onPress={handleCreateOrder}
+        disabled={!selectedProduct}
+      >
         Create Order
       </Button>
       <FlatList
@@ -101,8 +106,8 @@ const OrderList = ({
         pb="4"
         alignItems="center"
       >
-        <Text fontSize="xl">Summary:</Text>
-        <Text fontWeight="700" fontSize="xl">
+        <Text fontSize="3xl">Summary:</Text>
+        <Text fontWeight="700" fontSize="3xl">
           $ {calculateTotalPrice()}
         </Text>
       </View>
