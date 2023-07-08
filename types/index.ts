@@ -7,7 +7,7 @@ export type Restaurant = {
   longitude: number;
 };
 
-export type MenuItem = {
+export type Menu = {
   id: number;
   category: string;
   name: string;

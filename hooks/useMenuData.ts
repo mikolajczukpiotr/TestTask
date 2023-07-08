@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { MenuItem } from "../types";
+import { Menu } from "../types";
 
 const useMenuData = (restaurantId: string | undefined, category?: string) => {
-  const [menu, setMenu] = useState<MenuItem[]>([]);
+  const [menu, setMenu] = useState<Menu[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -15,7 +15,7 @@ const useMenuData = (restaurantId: string | undefined, category?: string) => {
     if (!restaurantId) return;
     try {
       setIsLoading(true);
-      const response = await axios.get<MenuItem[]>(
+      const response = await axios.get<Menu[]>(
         `https://private-anon-a47a6a7637-pizzaapp.apiary-mock.com/restaurants/${restaurantId}/menu`
       );
       const filteredMenu = category

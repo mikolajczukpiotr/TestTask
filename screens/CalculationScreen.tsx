@@ -1,17 +1,51 @@
-import { View, Text } from "native-base";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { View, Text, Select } from "native-base";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import SelectRestaurant from "../components/SelectRestaurant";
-import SelectCategory from "../components/SelectCategory";
+import GenericSelect from "../components/GenericSelect";
+import useRestaurantData from "../hooks/useRestaurantData";
+import useMenuData from "../hooks/useMenuData";
 
 const CalculationScreen = () => {
   const insets = useSafeAreaInsets();
   const [selectedRestaurant, setSelectedRestaurant] = useState<
     string | undefined
   >(undefined);
-  const handleRestaurantChange = (value: string) => {
-    setSelectedRestaurant(value.toString());
+  const [selectedCategory, setSelectedCategory] = useState<string | undefined>(
+    undefined
+  );
+  const [selectedProduct, setSelectedProduct] = useState<string | undefined>(
+    undefined
+  );
+  const {
+    restaurants,
+    isLoading: restaurantLoading,
+    error: restaurantError,
+  } = useRestaurantData();
+  const { uniqueCategories: categoryList } = useMenuData(selectedRestaurant);
+  const {
+    menu,
+    isLoading: menuLoading,
+    error: menuError,
+  } = useMenuData(selectedRestaurant, selectedCategory);
+
+  useEffect(() => {
+    // Clear selected category and product when restaurant changes
+    setSelectedCategory(undefined);
+    setSelectedProduct(undefined);
+  }, [selectedRestaurant]);
+
+  const handleCategoryChange = (value: string) => {
+    setSelectedCategory(value);
   };
+
+  const handleRestaurantChange = (value: string) => {
+    setSelectedRestaurant(value);
+  };
+
+  const handleProductChange = (value: string) => {
+    setSelectedProduct(value);
+  };
+
   return (
     <View
       style={{
@@ -22,11 +56,26 @@ const CalculationScreen = () => {
       px="4"
     >
       <Text>Create new entry</Text>
-      <SelectRestaurant
-        setSelectedRestaurant={handleRestaurantChange}
-        selectedRestaurant={selectedRestaurant}
+      <GenericSelect
+        setSelected={handleRestaurantChange}
+        selected={selectedRestaurant}
+        data={restaurants}
+        title="restaurant"
       />
-      <SelectCategory restaurantId={selectedRestaurant} />
+      <GenericSelect
+        setSelected={handleCategoryChange}
+        selected={selectedCategory}
+        data={categoryList}
+        title="category"
+        isDisabled={!selectedRestaurant || restaurantLoading }
+      />
+      <GenericSelect
+        setSelected={handleProductChange}
+        selected={selectedProduct}
+        data={menu}
+        title="product"
+        isDisabled={!selectedCategory || menuLoading || menuError}
+      />
     </View>
   );
 };
