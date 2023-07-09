@@ -83,7 +83,9 @@ const OrderList = ({
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <View>
-            <Text style={{ fontWeight: "bold" }}>{item}</Text>
+            <Text style={{ fontWeight: "bold" }} fontSize="2xl">
+              {item}
+            </Text>
             {orderList
               .filter((order) => order.restaurant === item)
               .map((order, index) => (

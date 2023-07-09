@@ -18,12 +18,13 @@ const OrderItem = ({
       flexDir="row"
       justifyContent="space-between"
     >
-      <Text>{order.product}</Text>
+      <Text fontSize="xl">{order.product}</Text>
       <View flexDir="row">
         <Input
           value={order.price.toString()}
           w="20"
           mx="2"
+          fontSize="lg"
           onChangeText={(text) => handlePriceChange(order, Number(text))}
           keyboardType="numeric"
         />
