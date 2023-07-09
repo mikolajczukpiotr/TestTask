@@ -1,7 +1,7 @@
 import { Button, View } from "native-base";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { RootNavigationProp } from "../../types/StackNavigator";
+import { RootNavigationProp } from "../../navigation/types";
 import Input from "./Input";
 
 const LoginForm = () => {

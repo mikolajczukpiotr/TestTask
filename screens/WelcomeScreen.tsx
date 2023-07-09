@@ -3,7 +3,7 @@ import { Text, Image, Flex, Button } from "native-base";
 import LoginForm from "../components/Login/LoginForm";
 import { KeyboardAvoidingView, Platform, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { RootNavigationProp } from "../types/StackNavigator";
+import { RootNavigationProp } from "../navigation/types";
 
 const WelcomeScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();

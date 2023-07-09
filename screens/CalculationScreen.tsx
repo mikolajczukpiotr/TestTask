@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { View, Text } from "native-base";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Select from "../components/Select";
@@ -18,22 +18,21 @@ const CalculationScreen = () => {
   const [selectedProduct, setSelectedProduct] = useState<string | undefined>(
     undefined
   );
-  const {
-    restaurants,
-    isLoading: restaurantLoading,
-    error: restaurantError,
-  } = useRestaurantData();
-  const { uniqueCategories: categoryList } = useMenuData(selectedRestaurant);
+  const { restaurants, isLoading: restaurantLoading } = useRestaurantData();
   const {
     menu,
     isLoading: menuLoading,
-    error: menuError,
-  } = useMenuData(selectedRestaurant, selectedCategory);
+    uniqueCategories,
+  } = useMenuData(selectedRestaurant);
+  const filteredMenu = useMemo(
+    () => menu.filter((product) => product.category === selectedCategory),
+    [menu, selectedCategory]
+  );
 
   useEffect(() => {
     // Clear selected category and product when restaurant changes
-    setSelectedCategory(undefined);
-    setSelectedProduct(undefined);
+    setSelectedCategory("");
+    setSelectedProduct("");
   }, [selectedRestaurant]);
 
   const handleCategoryChange = (value: string) => {
@@ -71,14 +70,14 @@ const CalculationScreen = () => {
         <Select
           setSelected={handleCategoryChange}
           selected={selectedCategory}
-          data={categoryList}
+          data={uniqueCategories(menu)}
           title="category"
           isDisabled={!selectedRestaurant || restaurantLoading}
         />
         <Select
           setSelected={handleProductChange}
           selected={selectedProduct}
-          data={menu}
+          data={filteredMenu}
           title="product"
           isDisabled={!selectedCategory || menuLoading}
         />
@@ -86,7 +85,7 @@ const CalculationScreen = () => {
           selectedRestaurant={selectedRestaurant}
           selectedProduct={selectedProduct}
           restaurants={restaurants}
-          menu={menu}
+          menu={filteredMenu}
         />
       </KeyboardAvoidingView>
     </View>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Select as NativeBaseSelect, View, Text } from "native-base";
-import useRestaurantData from "../hooks/useRestaurantData";
 import { Restaurant, Menu } from "../types";
 
 const Select = ({
