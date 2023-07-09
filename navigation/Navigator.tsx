@@ -12,7 +12,7 @@ const Navigator = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
+          name="Welcome"
           component={WelcomeScreen}
           options={{ headerShown: false }}
         />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Button, FlatList, Text, View } from "native-base";
 import { Restaurant, Menu, Order } from "../../types";
 import OrderItem from "./OrderItem";
@@ -20,18 +20,15 @@ const OrderList = ({
       const selectedRestaurantName = restaurants.find(
         (restaurant) => restaurant.id === Number(selectedRestaurant)
       )?.name;
-      const selectedProductName = menu.find(
+      const selectedProductData = menu.find(
         (product) => product.id.toString() === selectedProduct
-      )?.name;
-      const selectedProductPrice = menu.find(
-        (product) => product.id.toString() === selectedProduct
-      )?.price;
+      );
 
-      if (selectedProductName && selectedRestaurantName) {
+      if (selectedProduct && selectedRestaurantName) {
         const newOrder: Order = {
           restaurant: selectedRestaurantName || "",
-          product: selectedProductName || "",
-          price: selectedProductPrice || 0,
+          product: selectedProductData?.name || "",
+          price: selectedProductData?.price || 0,
         };
 
         setOrderList((prevOrderList) => [...prevOrderList, newOrder]);
@@ -63,13 +60,13 @@ const OrderList = ({
     ...new Set(orderList.map((order) => order.restaurant)),
   ];
 
-  const calculateTotalPrice = () => {
+  const calculateTotalPrice = useMemo(() => {
     let totalPrice = 0;
     orderList.forEach((order) => {
       totalPrice += order.price;
     });
     return totalPrice;
-  };
+  }, [orderList]);
 
   return (
     <>
@@ -108,7 +105,7 @@ const OrderList = ({
       >
         <Text fontSize="3xl">Summary:</Text>
         <Text fontWeight="700" fontSize="3xl">
-          $ {calculateTotalPrice()}
+          $ {calculateTotalPrice}
         </Text>
       </View>
     </>

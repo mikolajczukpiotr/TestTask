@@ -1,13 +1,13 @@
 import { Button, View } from "native-base";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { RootNavigationProp } from "../../types/StackNavigator";
+import { RootNavigationProp } from "../../navigation/types";
 import Input from "./Input";
 
 const LoginForm = () => {
   const navigation = useNavigation<RootNavigationProp>();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("fsdfsdf@gmail.com");
+  const [password, setPassword] = useState("fasdfsadfsad");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
