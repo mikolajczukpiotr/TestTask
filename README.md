@@ -2,7 +2,9 @@
 
 This project is based on Expo 49 and includes a login view, terms view, and a view with three select options for creating an order. Additionally, it features a summary price section at the bottom.
 
-Please note that Redux was not used in this project due to its small size and simplicity.
+## Trade Offs
+- Redux was not used in this project due to its small size and simplicity.
+- In production version of the app, i would add units tests for the components and the business logic but for the sake of time i didn't add them.
 
 ## Getting Started
 
