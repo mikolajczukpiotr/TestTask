@@ -6,8 +6,8 @@ import Input from "./Input";
 
 const LoginForm = () => {
   const navigation = useNavigation<RootNavigationProp>();
-  const [email, setEmail] = useState("fsdfsdf@gmail.com");
-  const [password, setPassword] = useState("fasdfsadfsad");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
